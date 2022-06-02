@@ -3,8 +3,9 @@ resource "aws_s3_bucket" "POC_Spring" {
 
   tags = {
     Name        = "POC_Spring"
-    Environment = "Dev"
+    type= "Spring"
   }
-}
+  }
+
 
 
