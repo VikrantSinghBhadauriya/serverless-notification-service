@@ -1,5 +1,5 @@
 variable "lambda_funtions" {
   type    = set(string)
-  default = ["lambda1", "lambda2"]
+  default = ["lambda_func_1", "lambda_func_2"]
 
 }
