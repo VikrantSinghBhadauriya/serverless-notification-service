@@ -17,5 +17,5 @@ resource "aws_iam_role" "poc_iam_for_lambda" {
 }
 EOF
 
-managed_policy_arns=["arn:aws:iam::aws:policy/AWSLambdaExecute"]
+  managed_policy_arns = ["arn:aws:iam::aws:policy/AWSLambdaExecute", "arn:aws:iam::aws:policy/AmazonSQSReadOnlyAccess"]
 }
