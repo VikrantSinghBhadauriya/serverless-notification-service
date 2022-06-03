@@ -17,10 +17,8 @@ def lambda_handler(event, context):
             json_line = json.loads(ndjson_line)
             result.append(json_line)
         print("Result: ", result)
-        with open('/tmp/your_file.txt', 'w') as f:
-            for item in result:
-                f.write("%s\n" % item)
-               
-        with open('/tmp/your_file.txt', 'rb') as f:
-            f.seek(0)
-            s3.upload_fileobj(f, "read-csv-s3", "file.txt")
+        s3.put_object(
+          Body=str(json.dumps(result)),
+          Bucket='poc-spring-test-bucket',
+          Key='file.txt'
+        )
