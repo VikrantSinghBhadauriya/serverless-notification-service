@@ -15,7 +15,7 @@ resource "aws_lambda_function" "lambda_func_1" {
 
   environment {
     variables = {
-      QueueName = "poc-sqs-queue"
+      queueName = "poc-sqs-queue"
     }
   }
 }
@@ -29,7 +29,8 @@ resource "aws_lambda_function" "lambda_func_2" {
   runtime          = "python3.8"
   environment {
     variables = {
-      Bucket = "poc-spring-test-bucket"
+      bucketName      = "poc-spring-test-bucket"
+      processedPrefix = "destination"
     }
   }
 }
@@ -50,12 +51,14 @@ resource "aws_lambda_permission" "test" {
   source_arn    = "arn:aws:s3:::${aws_s3_bucket.POC_Spring.id}"
 }
 
-resource "aws_cloudwatch_log_group" "lambda_1" {
-  name              = "/aws/lambda/${var.function_1}"
-  retention_in_days = 90
-}
 
-resource "aws_cloudwatch_log_group" "lambda_2" {
-  name              = "/aws/lambda/${var.function_2}"
-  retention_in_days = 90
-}
+
+# resource "aws_cloudwatch_log_group" "lambda_1" {
+#   name              = "/aws/lambda/${var.function_1}"
+#   retention_in_days = 90
+# }
+
+# resource "aws_cloudwatch_log_group" "lambda_2" {
+#   name              = "/aws/lambda/${var.function_2}"
+#   retention_in_days = 90
+# }

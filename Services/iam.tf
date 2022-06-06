@@ -35,7 +35,7 @@ resource "aws_iam_role_policy" "lambda_1" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
-        Resource = aws_cloudwatch_log_group.lambda_1.arn
+        Resource = "*"
       },
     ]
   })
@@ -49,13 +49,13 @@ resource "aws_iam_role_policy" "lambda_func_2" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "SQS"
+        Sid    = "S3"
         Effect = "Allow"
         Action = [
           "s3:GetObject",
           "s3:PutObject",
         ],
-        Resource = aws_sqs_queue.poc_SQS_queue.arn
+        Resource = aws_s3_bucket.POC_Spring.arn
       },
       {
         Sid    = "CloudwatchLogs"
@@ -65,7 +65,19 @@ resource "aws_iam_role_policy" "lambda_func_2" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
-        Resource = aws_cloudwatch_log_group.lambda_2.arn
+        Resource = "*"
+      },
+      {
+        Sid    = "SQS"
+        Effect = "Allow"
+        Action = [
+          "sqs:SendMessage",
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueUrl",
+          "sqs:GetQueueAttributes"
+        ],
+        Resource = aws_sqs_queue.poc_SQS_queue.arn
       },
     ]
   })

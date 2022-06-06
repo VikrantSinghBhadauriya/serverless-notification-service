@@ -28,8 +28,8 @@ def lambda_handler(event, context):
 
     logger.info(f"Event data - {event}")
 
-    bucket = environ["bucket-name"]
-    object_prefix = environ["processed-prefix"]
+    bucket = environ["bucketName"]
+    object_prefix = environ["processedPrefix"]
     data = event["Records"][0]["body"].strip('"')
 
     try:

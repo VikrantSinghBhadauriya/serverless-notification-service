@@ -27,7 +27,7 @@ def send_sqs_message(queue, body):
 
 def lambda_handler(event, context):
     """Lambda handler function"""
-    queue = environ["queue-name"]
+    queue = environ["queueName"]
 
     if event:
         logger.info(f"Event data - {event}")
