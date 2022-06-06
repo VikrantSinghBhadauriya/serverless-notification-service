@@ -1,0 +1,38 @@
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "ap-south-1",
+      "eventTime": "2022-06-02T10:10:01.594Z",
+      "eventName": "ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "AWS:AIDA4T5WNCZ4EADLSWFOL"
+      },
+      "requestParameters": {
+        "sourceIPAddress": "45.118.159.73"
+      },
+      "responseElements": {
+        "x-amz-request-id": "B5YKWWEKRYAVMP3F",
+        "x-amz-id-2": "4NfSQhxkBXH7tIUvcxeZNGGyP6BvUU2+9k+eGDskcEUQvwWVew9hX45hVtimfRupDXH57MWrHmr2Sb1oycvlxMbADtwF9Lj4"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "tf-s3-lambda-20220602092326485300000001",
+        "bucket": {
+          "name": "poc-spring-test-bucket",
+          "ownerIdentity": {
+            "principalId": "ANSWKFN54Q8A0"
+          },
+          "arn": "arn:aws:s3:::poc-spring-test-bucket"
+        },
+        "object": {
+          "key": "pocTest/test_data.json",
+          "size": 1893,
+          "eTag": "092a7cd778db1ec4b37565d9629c0635",
+          "sequencer": "0062988C798A98FFB5"
+        }
+      }
+    }
+  ]
+}
