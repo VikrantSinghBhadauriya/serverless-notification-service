@@ -3,7 +3,6 @@ data "archive_file" "zip_lambda" {
   type        = "zip"
   source_dir  = "${path.module}/function/${each.value}"
   output_path = "${path.module}/function/myzip/${each.value}.zip"
-
 }
 
 resource "aws_lambda_function" "lambda_func_1" {
@@ -19,8 +18,6 @@ resource "aws_lambda_function" "lambda_func_1" {
       QueueName = "poc-sqs-queue"
     }
   }
-
-
 }
 
 resource "aws_lambda_function" "lambda_func_2" {
@@ -35,7 +32,6 @@ resource "aws_lambda_function" "lambda_func_2" {
       Bucket = "poc-spring-test-bucket"
     }
   }
-
 }
 
 resource "aws_s3_bucket_notification" "aws-lambda-trigger" {
@@ -43,7 +39,6 @@ resource "aws_s3_bucket_notification" "aws-lambda-trigger" {
   lambda_function {
     lambda_function_arn = aws_lambda_function.lambda_func_1.arn
     events              = ["s3:ObjectCreated:Put", "s3:ObjectCreated:Post"]
-
   }
 }
 
@@ -53,4 +48,14 @@ resource "aws_lambda_permission" "test" {
   function_name = aws_lambda_function.lambda_func_1.function_name
   principal     = "s3.amazonaws.com"
   source_arn    = "arn:aws:s3:::${aws_s3_bucket.POC_Spring.id}"
+}
+
+resource "aws_cloudwatch_log_group" "lambda_1" {
+  name              = "poc-spring-lambda-1-logs"
+  retention_in_days = 90
+}
+
+resource "aws_cloudwatch_log_group" "lambda_2" {
+  name              = "poc-spring-lambda-2-logs"
+  retention_in_days = 90
 }
