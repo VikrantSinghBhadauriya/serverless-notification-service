@@ -1,0 +1,20 @@
+{
+  "Records": [
+    {
+      "messageId": "83de0c9a-5ed3-4be3-9783-a4bf446c42a1",
+      "receiptHandle": "AQEBtIZbp6ggGYcwnWo48t7Xdx+cAN+pnhK52L92tl8yxdHE1y4oYyh8Qp1cPHKvTJw+rKSM495hzj8M3sECvCAMr6IL1S2XFy7hhZfGfG2S8BAP/4cLOA7UYaX4cf8peWDZcwJAYagyzLK6xqUWnmvCee66hJ+YcdFJcwFG3GCj9OhdGmvoQIDUeik04sT5RS8pRFdJV02xBaX1+PQVUQMHbaHP5dOthpHQG6NZOcKQaimhaLllthexYw8j391be0vUzh9Dg0sIg/nNuVRN6G4f3wAFJ0qBmWhYKHIP4w7F/MJT6R2qH1DHdNTC1bOTnEPruOBf5SoCghiO2PRLR8wO+nEwFzA+fzPiKutRZmsXAN7sH2O7XPNNmlnJTnCHHf3dGy/O7C5uGOHD0jMjx5Yq4Q==",
+      "body": "pocTest/test_data.json",
+      "attributes": {
+        "ApproximateReceiveCount": "3",
+        "SentTimestamp": "1654165035284",
+        "SenderId": "AROA4T5WNCZ4LLQRYJB5N:lambda1",
+        "ApproximateFirstReceiveTimestamp": "1654165125284"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "a7a276fdf8294d65822a09f519b1bb36",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:ap-south-1:867429062264:poc-sqs-queue",
+      "awsRegion": "ap-south-1"
+    }
+  ]
+}
