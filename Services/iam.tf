@@ -35,7 +35,7 @@ resource "aws_iam_role_policy" "lambda_1" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
-        Resource = "*"
+        Resource = "${aws_cloudwatch_log_group.lambda_1.arn}:*"
       },
     ]
   })
@@ -55,7 +55,7 @@ resource "aws_iam_role_policy" "lambda_func_2" {
           "s3:GetObject",
           "s3:PutObject",
         ],
-        Resource = aws_s3_bucket.POC_Spring.arn
+        Resource = "${aws_s3_bucket.POC_Spring.arn}/*"
       },
       {
         Sid    = "CloudwatchLogs"
@@ -65,7 +65,7 @@ resource "aws_iam_role_policy" "lambda_func_2" {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
-        Resource = "*"
+        Resource = "${aws_cloudwatch_log_group.lambda_2.arn}:*"
       },
       {
         Sid    = "SQS"

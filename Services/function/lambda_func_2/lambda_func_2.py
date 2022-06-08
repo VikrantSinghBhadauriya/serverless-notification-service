@@ -31,6 +31,7 @@ def lambda_handler(event, context):
     bucket = environ["bucketName"]
     object_prefix = environ["processedPrefix"]
     data = event["Records"][0]["body"].strip('"')
+    filnename= data
 
     try:
         file_object = s3.get_object(Bucket=bucket, Key=data)
@@ -44,7 +45,7 @@ def lambda_handler(event, context):
             response = s3.put_object(
                 Body=str(json.dumps(new_data)),
                 Bucket=bucket,
-                Key=f"{object_prefix}/{data}",
+                Key=f"{object_prefix}/{filnename}",
             )
         except ClientError as e:
             logger.error(f"An error occured while object the file - {e}")

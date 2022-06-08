@@ -35,13 +35,7 @@ resource "aws_lambda_function" "lambda_func_2" {
   }
 }
 
-resource "aws_s3_bucket_notification" "aws-lambda-trigger" {
-  bucket = aws_s3_bucket.POC_Spring.id
-  lambda_function {
-    lambda_function_arn = aws_lambda_function.lambda_func_1.arn
-    events              = ["s3:ObjectCreated:Put", "s3:ObjectCreated:Post"]
-  }
-}
+
 
 resource "aws_lambda_permission" "test" {
   statement_id  = "AllowS3Invoke"
@@ -53,12 +47,12 @@ resource "aws_lambda_permission" "test" {
 
 
 
-# resource "aws_cloudwatch_log_group" "lambda_1" {
-#   name              = "/aws/lambda/${var.function_1}"
-#   retention_in_days = 90
-# }
+resource "aws_cloudwatch_log_group" "lambda_1" {
+  name              = "/aws/lambda/${var.function_1}"
+  retention_in_days = 90
+}
 
-# resource "aws_cloudwatch_log_group" "lambda_2" {
-#   name              = "/aws/lambda/${var.function_2}"
-#   retention_in_days = 90
-# }
+resource "aws_cloudwatch_log_group" "lambda_2" {
+  name              = "/aws/lambda/${var.function_2}"
+  retention_in_days = 90
+}
