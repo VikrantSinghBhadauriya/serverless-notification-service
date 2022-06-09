@@ -1,9 +1,9 @@
 resource "aws_sqs_queue" "poc_SQS_queue" {
-  name                      = "poc-sqs-queue"
-  delay_seconds             = 0
+  name                      = var.queue_name
+  delay_seconds             = 90
   max_message_size          = 262144
   message_retention_seconds = 86400
-  receive_wait_time_seconds = 0
+  receive_wait_time_seconds = 10
   redrive_policy = jsonencode({
     deadLetterTargetArn = aws_sqs_queue.poc_deadletter_queue.arn
     maxReceiveCount     = 2
@@ -18,11 +18,11 @@ resource "aws_sqs_queue" "poc_SQS_queue" {
 }
 
 resource "aws_sqs_queue" "poc_deadletter_queue" {
-  name                      = "poc-dead-letter-queue"
-  delay_seconds             = 0
+  name                      = var.dead_letter_queue_name
+  delay_seconds             = 90
   max_message_size          = 262144
   message_retention_seconds = 86400
-  receive_wait_time_seconds = 0
+  receive_wait_time_seconds = 10
   tags = {
     Type = "Spring_POC"
   }
