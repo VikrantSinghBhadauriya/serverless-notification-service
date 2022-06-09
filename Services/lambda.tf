@@ -16,6 +16,7 @@ resource "aws_lambda_function" "lambda_func_1" {
   environment {
     variables = {
       queueName = var.queue_name
+      queueURL  = aws_sqs_queue.poc_SQS_queue.url
     }
   }
 }
@@ -29,6 +30,7 @@ resource "aws_lambda_function" "lambda_func_2" {
   runtime          = "python3.8"
   environment {
     variables = {
+      queueURL        = aws_sqs_queue.poc_SQS_queue.url
       bucketName      = aws_s3_bucket.POC_Spring.id
       processedPrefix = var.processed_prefix
       region          = var.aws_region
