@@ -15,7 +15,8 @@ resource "aws_lambda_function" "lambda_func_1" {
 
   environment {
     variables = {
-      queueName = "poc-sqs-queue"
+      queueName = var.queue_name
+      queueURL  = aws_sqs_queue.poc_SQS_queue.url
     }
   }
 }
@@ -29,13 +30,13 @@ resource "aws_lambda_function" "lambda_func_2" {
   runtime          = "python3.8"
   environment {
     variables = {
-      bucketName      = "poc-spring-test-bucket"
-      processedPrefix = "destination"
+      queueURL        = aws_sqs_queue.poc_SQS_queue.url
+      bucketName      = aws_s3_bucket.POC_Spring.id
+      processedPrefix = var.processed_prefix
+      region          = var.aws_region
     }
   }
 }
-
-
 
 resource "aws_lambda_permission" "test" {
   statement_id  = "AllowS3Invoke"
@@ -44,8 +45,6 @@ resource "aws_lambda_permission" "test" {
   principal     = "s3.amazonaws.com"
   source_arn    = "arn:aws:s3:::${aws_s3_bucket.POC_Spring.id}"
 }
-
-
 
 resource "aws_cloudwatch_log_group" "lambda_1" {
   name              = "/aws/lambda/${var.function_1}"

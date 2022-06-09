@@ -4,17 +4,17 @@ import boto3
 from os import environ
 from botocore.exceptions import ClientError
 
+queue_name = environ["queueName"]
+queue_url = environ["queueURL"]
+
+sqs = boto3.client("sqs", region_name="ap-south-1")
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
 def send_sqs_message(queue, body):
     """Send filename as SQS message"""
-    sqs = boto3.client("sqs", region_name="ap-south-1")
-
-    sqs_queue_url = sqs.get_queue_url(QueueName=queue)
-    queue_url = sqs_queue_url["QueueUrl"]
-    logger.info(f"Queue URL - {queue_url}")
 
     try:
         response = sqs.send_message(QueueUrl=queue_url, MessageBody=json.dumps(body))
@@ -27,16 +27,14 @@ def send_sqs_message(queue, body):
 
 def lambda_handler(event, context):
     """Lambda handler function"""
-    queue = environ["queueName"]
 
-    if event:
-        logger.info(f"Event data - {event}")
+    logger.info(f"Event data - {event}")
 
-        object = str(event["Records"][0]["s3"]["object"]["key"])
-        msg = send_sqs_message(queue, object)
+    object = str(event["Records"][0]["s3"]["object"]["key"])
+    msg = send_sqs_message(queue_name, object)
 
-        if msg:
-            logger.info("Response form SQS API - {msg}")
-            logger.info(f'SQS message ID: {msg["MessageId"]}')
+    if msg:
+        logger.info("Response form SQS API - {msg}")
+        logger.info(f'SQS message ID: {msg["MessageId"]}')
 
-        return {"statusCode": 200, "body": json.dumps(event)}
+    return {"statusCode": 200, "body": json.dumps(event)}

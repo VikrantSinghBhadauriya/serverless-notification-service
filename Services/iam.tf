@@ -24,6 +24,7 @@ resource "aws_iam_role_policy" "lambda_1" {
           "sqs:ReceiveMessage",
           "sqs:DeleteMessage",
           "sqs:GetQueueUrl",
+          "sqs:GetQueueAttributes"
         ],
         Resource = aws_sqs_queue.poc_SQS_queue.arn
       },
